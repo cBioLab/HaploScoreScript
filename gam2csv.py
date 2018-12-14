@@ -19,7 +19,7 @@ def getPath(gamfile):
     haplo_list = []
     out = subprocess.check_output("vg view -a " + gamfile, shell=True).strip()
     out = out.decode('utf-8')
-    print(out)
+    #print(out)
     outs = out.split('\n')
     for i,o in enumerate(outs):
         haploJSON = json.loads(o)
@@ -31,7 +31,7 @@ def getVG(vgfile):
     node_list = []
     out = subprocess.check_output("vg view -j -V " + vgfile, shell=True).strip()
     out = out.decode('utf-8')
-    print(out)
+    #print(out)
     vgjson = json.loads(out)
     for node in vgjson["node"]:
         node_list.append((int(node["id"]),node["sequence"]))
@@ -39,6 +39,6 @@ def getVG(vgfile):
 
 if __name__=="__main__":
     haplo_list = getPath("input.gam")
-    #print(haplo_list)
+    print(haplo_list)
     node_list = getVG("input.vg")
-    #print(node_list)
+    print(node_list)

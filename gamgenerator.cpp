@@ -130,17 +130,16 @@ Haplo createHaplo(const GAM& gam){
   int crtNode = gam[crtHaplo][0].node;
   double piC = 0.7; // current piC
   Haplo resultHaplo;
+  map<int,vector<pair<int,int> > > node2idx;
 
+  for(int i = 0; i < haploNum; i++){
+    for(int j = 0; j < (int)gam[i].size(); j++){
+      node2idx[gam[i][j].node].push_back(pair<int,int>(i,j));
+    }
+  }
   for(int i = 0; ; ){
     resultHaplo.push_back((GAMelem){crtNode, gam[crtHaplo][i].basenum, gam[crtHaplo][i].base});
-    vector<pair<int,int> > canditate;
-    for(int j = 0; j < haploNum; j++){
-      for(int k = 0; k < (int)gam[j].size(); k++){
-        if(gam[j][k].node != crtNode) continue;
-        canditate.push_back(pair<int,int>(j,k));
-        break;
-      }
-    }
+    vector<pair<int,int> > canditate = node2idx[crtNode];
     double piR = (1.0 - piC) / (double) canditate.size();
     for(int cnt = 0; cnt < gam[crtHaplo][i].basenum; cnt++){
       double p = (double) rand100(mt) / 100.0;

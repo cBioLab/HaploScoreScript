@@ -38,7 +38,7 @@ def getVG(vgfile):
     return node_list
 
 if __name__=="__main__":
-    haplo_list = getPath("input.gam")
+    haplo_list = getPath(sys.argv[1] + ".gam")
     print(haplo_list)
-    node_list = getVG("input.vg")
+    node_list = getVG(sys.argv[1] + ".vg")
     print(node_list)

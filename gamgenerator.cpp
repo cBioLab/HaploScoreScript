@@ -40,12 +40,8 @@ vector<string> split(const string &s, char c1, char c2) {
   return elems;
 }
 
-string getfileName(string prf, string suf, int fileidx){
-  return "./testdata" + prf + to_string(fileidx) + suf;
-}
-
-GAM inputGAM(){
-  ifstream inputfile("input.txt");
+GAM inputGAM(string filename){
+  ifstream inputfile(filename);
 
   string pathinfo, haploinfo;
   Haplo inputhaplo;
@@ -183,7 +179,7 @@ GAM gamGenerate(const GAM& gam){
 }
 
 int main(int argc, char *argv[]){
-  GAM inputgam = inputGAM();
+  GAM inputgam = inputGAM(string(argv[1]) + ".txt");
 #ifdef DEBUG
   // for DEBUG
   for(Haplo h : inputgam){
@@ -212,7 +208,7 @@ int main(int argc, char *argv[]){
     cerr << endl;
   }
 #endif
-  outputGAM(resultgam, "output.csv");
+  outputGAM(resultgam, string(argv[1]) + ".csv");
 
   return 0;
 }

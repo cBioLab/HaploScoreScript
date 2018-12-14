@@ -5,7 +5,7 @@ import sys
 haplolist = []
 seqdic = {}
 
-with open('output.csv', 'r') as f:
+with open(sys.argv[1] + ".csv", 'r') as f:
   reader = csv.reader(f)
 
   for row in reader:
@@ -18,7 +18,7 @@ with open('output.csv', 'r') as f:
       break
     seqdic[row[0]]=row[1];
 
-f = open('output.json', 'w')
+f = open(sys.argv[1] + ".json", 'w')
 
 for haplo in haplolist:
   seqstr = ""
